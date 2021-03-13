@@ -11,8 +11,12 @@
 |
 */
 
-Route::group(['middleware' => ['get.menu'], 'prefix'=> 'admin'], function () {
+$adminPrefix = 'admin';
+
+Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function () use ($adminPrefix) {
+
     Route::get('/', function () {           return view('dashboard.homepage'); });
+    Route::get('/logout', [\App\Http\Controllers\Auth\LoginController::class,'logout'])->name('admin.logout');
 
     Route::group(['middleware' => ['role:user']], function () {
         Route::get('/colors', function () {     return view('dashboard.colors'); });
