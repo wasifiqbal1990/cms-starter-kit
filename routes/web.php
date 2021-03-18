@@ -84,9 +84,23 @@ Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function (
         Route::get('pages/create',[\App\Http\Controllers\PagesController::class,'create'])->name('pages.create');
         Route::post('pages',[\App\Http\Controllers\PagesController::class,'store'])->name('pages.store');
         Route::get('pages/{page}/edit',[\App\Http\Controllers\PagesController::class,'edit'])->name('pages.edit');
-        Route::patch('pages',[\App\Http\Controllers\PagesController::class,'patch'])->name('pages.update');
+        Route::patch('pages/{page}',[\App\Http\Controllers\PagesController::class,'update'])->name('pages.update');
         Route::delete('pages/{page}/delete',[\App\Http\Controllers\PagesController::class,'delete'])->name('pages.destroy');
 
+        Route::get('events', [\App\Http\Controllers\NoticesController::class,'index'])->name('events.index')->defaults('type','events');
+        Route::get('events/create', [\App\Http\Controllers\NoticesController::class,'create'])->name('events.create')->defaults('type','events');
+        Route::post('events', [\App\Http\Controllers\NoticesController::class,'store'])->name('events.store')->defaults('type','events');
+        Route::get('events/{event}/edit', [\App\Http\Controllers\NoticesController::class,'edit'])->name('events.edit')->defaults('type','events');
+        Route::patch('events/{event}', [\App\Http\Controllers\NoticesController::class,'update'])->name('events.update')->defaults('type','events');
+        Route::delete('events/{event}/delete', [\App\Http\Controllers\NoticesController::class,'delete'])->name('events.destroy')->defaults('type','events');
+
+
+        Route::get('notifications', [\App\Http\Controllers\NoticesController::class,'index'])->name('notification.index')->defaults('type','notification');
+        Route::get('notifications/create', [\App\Http\Controllers\NoticesController::class,'create'])->name('notification.create')->defaults('type','notification');
+        Route::post('notifications', [\App\Http\Controllers\NoticesController::class,'store'])->name('notification.create')->defaults('type','notification');
+        Route::get('notifications/{notification}/edit', [\App\Http\Controllers\NoticesController::class,'edit'])->name('notification.edit')->defaults('type','notification');
+        Route::patch('notifications/{notification}', [\App\Http\Controllers\NoticesController::class,'update'])->name('notification.edit')->defaults('type','notification');
+        Route::delete('notifications/{notification}/delete', [\App\Http\Controllers\NoticesController::class,'delete'])->name('notification.destroy')->defaults('type','notification');
         //====
 
         Route::get('sections',[\App\Http\Controllers\SectionsController::class,'index'])->name('sections.index');

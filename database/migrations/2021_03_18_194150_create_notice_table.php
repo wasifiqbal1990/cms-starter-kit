@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSectionsTable extends Migration
+class CreateNoticeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('short_description');
+            $table->string('short_description');
             $table->text('description');
-            $table->json('extra')->nullable();
-            $table->integer('page_id');
-            $table->string('hashtag');
-            $table->integer('order')->default(0);
+            $table->string('url');
+            $table->tinyInteger('status');
+            $table->tinyInteger('type'); // news | notification
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('notices');
     }
 }

@@ -10,7 +10,7 @@
                         <div class="card-header">
                             <i class="fa fa-align-justify"></i> {{ __('Create Section') }}</div>
                         <div class="card-body">
-                            <form method="POST" class="form-horizontal" action="{{ route('sections.store') }}">
+                            <form method="POST" enctype='multipart/form-data' class="form-horizontal" action="{{ route('sections.store') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-md-2 col-form-label">Title</label>
@@ -41,21 +41,25 @@
                                     </select>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label class="col-md-2 col-form-label">Order</label>
+                                    <input class="form-control col-md-4" type="number" placeholder="{{ __('Order') }}" name="order">
+                                </div>
 
                                 <div class="images">
                                     <div class="clone_item">
-                                        <div class="form-group">
+                                        <div class="form-group image_section">
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label">Section Image</label>
-                                                <input type="file" class="form-control col-md-4" name="section[image][0]">
+                                                <input type="file" class="form-control col-md-4" name="section[0][image]">
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label">Image Heading</label>
-                                                <input type="text" class="form-control col-md-4" name="section[image_heading][0]">
+                                                <input type="text" class="form-control col-md-4" name="section[0][heading]">
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-md-2 col-form-label">Image Description</label>
-                                                <textarea class="form-control col-md-6" name="section[image_description][0]"></textarea>
+                                                <textarea class="form-control col-md-6" name="section[0][description]"></textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
@@ -111,8 +115,8 @@
         var test = "";
         var i = 1;
         var divs = $(".clone_item").contents().clone();
-        sectionIndex = $('.images .form-group').length;
-
+        sectionIndex = $('.images .image_section').length;
+alert(sectionIndex);
         divs.find(":input").each(function(id,field){
             $(field).val("").attr('name',function(id,name){
                 if(typeof name !== 'undefined'){

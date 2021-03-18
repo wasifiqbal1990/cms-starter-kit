@@ -155,6 +155,8 @@ class MenusTableSeeder extends Seeder
         $this->beginDropdown('user,admin', 'CMS', 'cil-puzzle');
             $this->insertLink('user,admin','Pages','/'.$adminPrefix.'/cms/pages');
             $this->insertLink('user,admin','Sections','/'.$adminPrefix.'/cms/sections');
+            $this->insertLink('user,admin','Events','/'.$adminPrefix.'/cms/events');
+            $this->insertLink('user,admin','Notifications','/'.$adminPrefix.'/cms/notifications');
         $this->endDropdown();
 
         $this->beginDropdown('user,admin', 'Base', 'cil-puzzle');
