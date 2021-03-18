@@ -11,6 +11,8 @@
 |
 */
 
+//{{dd(\Auth::user());}}
+
 $adminPrefix = 'admin';
 
 Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function () use ($adminPrefix) {
@@ -76,7 +78,28 @@ Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function (
         'destroy'   => 'resource.destroy'
     ]);
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['prefix' => 'cms'],function (){
+
+        Route::get('pages',[\App\Http\Controllers\PagesController::class,'index'])->name('pages.index');
+        Route::get('pages/create',[\App\Http\Controllers\PagesController::class,'create'])->name('pages.create');
+        Route::post('pages',[\App\Http\Controllers\PagesController::class,'store'])->name('pages.store');
+        Route::get('pages/{page}/edit',[\App\Http\Controllers\PagesController::class,'edit'])->name('pages.edit');
+        Route::patch('pages',[\App\Http\Controllers\PagesController::class,'patch'])->name('pages.update');
+        Route::delete('pages/{page}/delete',[\App\Http\Controllers\PagesController::class,'delete'])->name('pages.destroy');
+
+        //====
+
+        Route::get('sections',[\App\Http\Controllers\SectionsController::class,'index'])->name('sections.index');
+        Route::get('sections/create',[\App\Http\Controllers\SectionsController::class,'create'])->name('sections.create');
+        Route::post('sections',[\App\Http\Controllers\SectionsController::class,'store'])->name('sections.store');
+        Route::get('sections/{section}/edit',[\App\Http\Controllers\SectionsController::class,'edit'])->name('sections.edit');
+        Route::patch('sections',[\App\Http\Controllers\SectionsController::class,'patch'])->name('sections.update');
+        Route::delete('sections/{section}/delete',[\App\Http\Controllers\SectionsController::class,'delete'])->name('sections.destroy');
+
+    });
+
+//    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group([], function () {
         Route::resource('bread',  'BreadController');   //create BREAD (resource)
         Route::resource('users',        'UsersController')->except( ['create', 'store'] );
         Route::resource('roles',        'RolesController');
@@ -106,6 +129,7 @@ Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function (
             Route::get('/delete',   'MenuController@delete')->name('menu.menu.delete');
         });
         Route::prefix('media')->group(function () {
+
             Route::get('/',                 'MediaController@index')->name('media.folder.index');
             Route::get('/folder/store',     'MediaController@folderAdd')->name('media.folder.add');
             Route::post('/folder/update',   'MediaController@folderUpdate')->name('media.folder.update');

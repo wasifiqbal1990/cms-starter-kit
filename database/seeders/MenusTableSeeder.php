@@ -151,6 +151,12 @@ class MenusTableSeeder extends Seeder
         $this->insertTitle('user,admin', 'Theme');
         $this->insertLink('user,admin', 'Colors', '/'.$adminPrefix.'/colors', 'cil-drop1');
         $this->insertLink('user,admin', 'Typography', '/'.$adminPrefix.'/typography', 'cil-pencil');
+
+        $this->beginDropdown('user,admin', 'CMS', 'cil-puzzle');
+            $this->insertLink('user,admin','Pages','/'.$adminPrefix.'/cms/pages');
+            $this->insertLink('user,admin','Sections','/'.$adminPrefix.'/cms/sections');
+        $this->endDropdown();
+
         $this->beginDropdown('user,admin', 'Base', 'cil-puzzle');
             $this->insertLink('user,admin', 'Breadcrumb',    '/'.$adminPrefix.'/base/breadcrumb');
             $this->insertLink('user,admin', 'Cards',         '/'.$adminPrefix.'/base/cards');
