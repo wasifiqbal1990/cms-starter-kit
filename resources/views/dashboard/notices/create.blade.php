@@ -1,5 +1,6 @@
 @extends('dashboard.base')
 
+
 @section('content')
 
     <div class="container-fluid">
