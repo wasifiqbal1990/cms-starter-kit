@@ -20,6 +20,7 @@ class CreatePagesTable extends Migration
             $table->string('short_description');
             $table->text('description');
             $table->json('extra')->nullable();
+            $table->string('key');
             $table->timestamps();
         });
     }

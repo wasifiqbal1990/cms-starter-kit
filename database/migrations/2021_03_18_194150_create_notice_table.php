@@ -20,7 +20,7 @@ class CreateNoticeTable extends Migration
             $table->text('description');
             $table->string('url');
             $table->tinyInteger('status');
-            $table->tinyInteger('type'); // news | notification
+            $table->tinyInteger('type'); // events 1 | notification 2
             $table->timestamps();
         });
     }

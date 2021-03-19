@@ -16,7 +16,6 @@ class SectionsController extends Controller
 
      public function create(Request $request)
      {
-         dd($request->all());
          $pages = Pages::all();
          return view('dashboard.sections.create', ['pages' => $pages]);
      }

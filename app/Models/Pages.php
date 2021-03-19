@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pages extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','slug','description','short_description','extra'];
+    protected $fillable = ['title','slug','description','short_description','extra','key'];
     protected $casts = [
         'extra' => 'array'
     ];
@@ -18,6 +18,6 @@ class Pages extends Model
      */
     public function sections()
     {
-        return $this->hasMany(Sections::class);
+        return $this->hasMany(Sections::class, 'page_id');
     }
 }

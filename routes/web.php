@@ -13,6 +13,8 @@
 
 //{{dd(\Auth::user());}}
 
+Route::get('/', [\App\Http\Controllers\Frontend\HomePageController::class,'index'])->name('homepage');
+
 $adminPrefix = 'admin';
 
 Route::group(['middleware' => ['get.menu'], 'prefix'=> $adminPrefix], function () use ($adminPrefix) {

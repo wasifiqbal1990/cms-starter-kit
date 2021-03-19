@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Notices;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        $notifications = Notices::where('type',2)->where('status',1)->get();
+        View::share('notifications', $notifications);
     }
 }
