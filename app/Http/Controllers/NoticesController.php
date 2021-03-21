@@ -10,12 +10,15 @@ class NoticesController extends Controller
 {
     public function index(Request $request, $type)
     {
-        $notices = Notices::paginate( 20 );
+        $noticetype = $type == 'events'? 1:2;
+        $notices = Notices::where('type',$noticetype)->paginate( 20 );
+
         return view('dashboard.notices.noticesList', ['notices' => $notices,'type' => $type]);
     }
 
     public function create(Request $request, $type)
     {
+//        $type = $type == 'events'? 1:2;
         return view('dashboard.notices.create',['type' => $type]);
     }
 
